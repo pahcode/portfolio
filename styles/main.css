@@ -16,6 +16,8 @@ dl, dt, dd { margin: 0; padding: 0; }
 p { margin: 0; padding: 0; }
 u { display: inline-block; text-decoration: none; line-height: 1.8; }
 img { border: 0; }
+input { border: none; outline: none; }
+input:focus { background-color: transparent; }
 
 /* 헤더 */
 .header { padding: 30px 20px; border-top: 7px solid #a29fd8; background-color: #fff; }
@@ -47,27 +49,39 @@ h2 { position: absolute; height: 0; text-indent: -9999px; color: transparent; }
 .aboutMe dd { width: calc(100% - 18px); padding-left: 12px; font-size: 13px; font-weight: 500; color: #696fb9; }
 .aboutMe dd a { font-size: 13px; font-weight: 500; color: #696fb9; }
 
-.project { padding: 50px 20px 20px; }
-.project h3 { margin-bottom: 20px; font-size: 18px; }
-.project .edu { margin-bottom: 80px; }
-.project .work {  }
-.project ul { padding: 0 10px; }
-.project li { margin-bottom: 50px; }
-.project li .title {  }
-.project li .title img { width: 100%; max-width: 424px; margin-bottom: 10px; }
-.project li.m .title img { width: 40%; max-width: 378px; }
-.project li .title b { display: block; font-size: 18px; }
-.project li .title a { display: inline-block; margin-bottom: 15px; border-bottom: 1px dashed #b3b6e4; font-size: 13px; font-weight: 400; color: #989cce; }
-.project li .title a:hover { color: #8286bd; }
-.project li .title p { font-size: 13px; color: #b5b5b5; }
-.project li .date { margin: 10px 0; padding: 0 10px; }
-.project li .date .day { margin-right: 5px; font-size: 13px; font-weight: 500; }
-.project li .date .day em {  }
-.project li .date .period { padding: 1px 6px; border-radius: 4px; background: #b7b7b7; font-size: 12px; color: #fff; }
-.project li .detail {  }
-.project li .detail dl { display: flex; flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 5px 0; padding: 0 10px; }
-.project li .detail dl dt { width: 70px; font-size: 13px; color: #616161; }
-.project li .detail dl dd { width: calc(100% - 70px); font-size: 13px; color: #b5b5b5; }
+.project { padding: 80px 20px 20px; }
+.project .filter { margin-bottom: 30px; text-align: right; }
+.project .filter article { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-end; align-items: flex-start; gap: 18px; }
+.project .filter .sort { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; border-right: 1px solid #ddd; }
+.project .filter .sort label { border: 1px solid #ddd; border-right: 1px solid transparent; cursor: pointer; }
+.project .filter .sort label:not(:last-child) { margin-right: -1px; }
+.project .filter .sort label:has(input[type="radio"]:checked) { border: 1px solid #a29fd8; background: #ececf7; z-index: 1; }
+.project .filter .sort input[type="radio"] { appearance: none; -moz-appearance: none; -webkit-appearance: none; position: absolute; width: 0; height: 0; background: none; }
+.project .filter .sort input[type="radio"] + span { display: flex; justify-content: center; align-items: center; min-height: 24px; padding: 0 18px; font-size: 12px; color: #aaa; }
+.project .filter .sort input[type="radio"]:checked + span { font-weight: 500; color: #696fb9; }
+.project .filter .date { }
+.project .filter .date select { appearance: none; -webkit-appearance: none; -moz-appearance: none; min-height: 24px; padding: 0 5px 0 24px; border: none; background: url(../images/filter_date.png) left 2px center no-repeat; background-size: 17px auto; font-size: 12px; text-align: center; color: #777; cursor: pointer; }
+.project .filter .date select:focus { outline: none; }
+
+.project .list h3 { margin-bottom: 20px; font-size: 18px; color: #888; }
+.project .list .sort[sort=edu] { margin-bottom: 80px; }
+.project .list ol { padding: 0 10px; }
+.project .list li { margin-bottom: 80px; }
+.project .list li .title {  }
+.project .list li .title img { width: 100%; max-width: 424px; margin-bottom: 10px; }
+.project .list li .title.m img { width: 40%; max-width: 378px; }
+.project .list li .title b { display: block; font-size: 18px; }
+.project .list li .title a { display: inline-block; margin-bottom: 15px; border-bottom: 1px dashed #b3b6e4; font-size: 13px; font-weight: 400; color: #989cce; }
+.project .list li .title a:hover { color: #8286bd; }
+.project .list li .title p { font-size: 13px; color: #b5b5b5; }
+.project .list li .date { margin: 10px 0; padding: 0 10px; }
+.project .list li .date .day { margin-right: 5px; font-size: 13px; font-weight: 500; }
+.project .list li .date .day em {  }
+.project .list li .date .period { padding: 1px 6px; border-radius: 4px; background: #b7b7b7; font-size: 12px; color: #fff; }
+.project .list li .detail {  }
+.project .list li .detail dl { display: flex; flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 5px 0; padding: 0 10px; }
+.project .list li .detail dl dt { width: 70px; font-size: 13px; color: #616161; }
+.project .list li .detail dl dd { width: calc(100% - 70px); font-size: 13px; color: #b5b5b5; }
 
 .footer { padding: 30px; background: #484848; text-align: center; }
 .footer span { font-size: 12px; color: #cdcdcd; }
@@ -93,31 +107,34 @@ h2 { position: absolute; height: 0; text-indent: -9999px; color: transparent; }
     .aboutMe dd { width: calc(100% - 30px); margin-top: 2px; padding-left: 22px; font-size: 15px; font-weight: 600; }
     .aboutMe dd a { font-size: 15px; font-weight: 600; }
     .project { width: calc(100% - 366px); padding: 30px 60px 80px; overflow-y: auto; }
-    .project h3 { font-size: 20px; }
+    .project .filter .sort input[type="radio"] + span { padding: 0 25px; font-size: 13px; }
+    .project .filter .date select { font-size: 13px; }
+    .project .list h3 { font-size: 20px; }
     .footer { padding: 40px 30px; }
     .footer span { font-size: 13px; }
+    .footer .topBtn:hover::before { border-top: 3px solid rgba(105, 111, 185, .5); border-right: 3px solid rgba(105, 111, 185, .5); }
 }
 
 @media screen and (min-width:1200px){
-    .project ul { padding: 0; }
-    .project li { position: relative; margin-bottom: 0; padding-bottom: 70px; padding-left: 37px; }
-    .project li:last-child { padding-bottom: 0; }
-    .project li::before { content: ""; position: absolute; top: 5px; left: 18px; width: 1px; height: 100%; background-color: #bfbfbf; }
-    .project li::after { content: ""; position: absolute; top: 5px; left: 13px; width: 11px; height: 11px; border-radius: 6px; background-color: #2c2c2c; }
-    .project li .title { margin-bottom: 25px; padding-left: 200px; }
-    .project li .title img { float: right; max-width: 212px; margin-bottom: 0; margin-left: 20px; }
-    .project li.m .title img { max-width: 126px; }
-    .project li .title b { margin-bottom: 7px; }
-    .project li .title a { margin-bottom: 25px; font-size: 14px; }
-    .project li .title p { font-size: 14px; line-height: 1.5; }
-    .project li .date { position: absolute; top: 0; left: 57px; min-width: 100px; margin: 0; padding: 0; text-align: right; }
-    .project li .date .day { display: block; margin-right: 0; margin-bottom: 8px; font-size: 16px; font-weight: 600; }
-    .project li .date .day em { display: block; }
-    .project li .date .period { font-size: 13px; font-weight: 600; }
-    .project li .detail { padding-left: 200px; }
-    .project li .detail dl { gap: 6px 0; padding: 0; }
-    .project li .detail dl dt { font-size: 14px; font-weight: 400; }
-    .project li .detail dl dd { font-size: 14px; font-weight: 400; }
+    .project .list ol { padding: 0; }
+    .project .list li { position: relative; margin-bottom: 0; padding-bottom: 70px; padding-left: 37px; }
+    .project .list li:last-child { padding-bottom: 0; }
+    .project .list li::before { content: ""; position: absolute; top: 5px; left: 18px; width: 1px; height: 100%; background-color: #bfbfbf; }
+    .project .list li::after { content: ""; position: absolute; top: 5px; left: 13px; width: 11px; height: 11px; border-radius: 6px; background-color: #2c2c2c; }
+    .project .list li .title { margin-bottom: 25px; padding-left: 200px; }
+    .project .list li .title img { float: right; max-width: 212px; margin-bottom: 0; margin-left: 20px; }
+    .project .list li .title.m img { max-width: 126px; }
+    .project .list li .title b { margin-bottom: 7px; }
+    .project .list li .title a { margin-bottom: 25px; font-size: 14px; }
+    .project .list li .title p { font-size: 14px; line-height: 1.5; }
+    .project .list li .date { position: absolute; top: 0; left: 57px; min-width: 100px; margin: 0; padding: 0; text-align: right; }
+    .project .list li .date .day { display: block; margin-right: 0; margin-bottom: 8px; font-size: 16px; font-weight: 600; }
+    .project .list li .date .day em { display: block; }
+    .project .list li .date .period { font-size: 13px; font-weight: 600; }
+    .project .list li .detail { padding-left: 200px; }
+    .project .list li .detail dl { gap: 6px 0; padding: 0; }
+    .project .list li .detail dl dt { font-size: 14px; font-weight: 400; }
+    .project .list li .detail dl dd { font-size: 14px; font-weight: 400; }
     .footer .topBtn { width: 50px; height: 50px; }
     .footer .topBtn::before { top: 19px; left: 16px; width: 16px; height: 16px; border-top: 3px solid rgba(0, 0, 0, .5); border-right: 3px solid rgba(0, 0, 0, .5); }
 }
